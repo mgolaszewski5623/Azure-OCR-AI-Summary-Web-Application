@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Upload Image for OCR";
+}
+
+<h2 class="mb-4">Upload an Image for Text Extraction</h2>
+
+<form asp-action="Upload" method="post" enctype="multipart/form-data" class="mb-4">
+    <div class="mb-3">
+        <input type="file" name="file" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+@if (ViewBag.FileName != null)
+{
+    <div class="card mt-4">
+        <div class="card-header">
+            OCR Result for: @ViewBag.FileName
+        </div>
+        <div class="card-body">
+            <pre>@ViewBag.ExtractedText</pre>
+        </div>
+        <div class="card-body">
+            <pre>@ViewBag.AISummary ?? "No summary generated"</pre>
+        </div>
+    </div>
+}

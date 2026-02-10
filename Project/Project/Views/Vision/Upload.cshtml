@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Upload";
+}
+
+<h2 class="mb-4">Upload Image</h2>
+
+<form method="post" enctype="multipart/form-data" asp-action="UploadFile" class="mb-4">
+    <div class="mb-3">
+        <input type="file" name="file" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@if (ViewBag.ImageUrl != null)
+{
+    <h3>Result</h3>
+
+    <img src="@ViewBag.ImageUrl" style="max-width:400px;" />
+
+    <h4>Extracted Text</h4>
+    <pre>@ViewBag.ExtractedText</pre>
+
+    <h4>AI Summary</h4>
+    <pre>@ViewBag.AISummary ?? "No summary generated"</pre>
+}
+

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Project.Models.ImageDocument>
+
+@{
+    ViewData["Title"] = "History";
+}
+
+<h2 class="mb-4">Uploaded Files History</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No files uploaded yet.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Text</th>
+                    <th>Date</th>
+                    <th>Export</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var doc in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@doc.ImageUrl" style="width:120px;" />
+                        </td>
+                        <td>
+                            <pre>@doc.ExtractedText</pre>
+                        </td>
+                        <td>@doc.Timestamp.ToLocalTime()</td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary"
+                               asp-controller="Vision"
+                               asp-action="ExportPdf"
+                               asp-route-id="@doc.Id">
+                                Download PDF
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+}
